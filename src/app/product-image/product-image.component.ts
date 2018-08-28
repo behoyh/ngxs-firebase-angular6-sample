@@ -16,16 +16,20 @@ export class ProductImageComponent implements OnInit, OnChanges {
   productId: string;
 
   productImages: ProductImage[] = [];
-  srcImg: Array<Observable<string>> | null = [];
+  srcImg: Array<string> = [];
   titleImg: Array<string> = [];
 
   constructor(private productService: ProductService, private af: AngularFireStorage) { }
 
   ngOnChanges() {
+    // ngxs storeify this
+    // Thats enough for today!
+    this.srcImg = [];
+    this.titleImg = [];
     this.productService.getProductImages(this.productId).subscribe(productImages => {
       this.productImages = productImages;
       this.productImages.forEach(productImage => {
-        this.srcImg.push(this.af.ref(productImage.path).getDownloadURL());
+        this.srcImg.push(productImage.path);
         this.titleImg.push(productImage.title);
       }
       )

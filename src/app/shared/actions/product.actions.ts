@@ -32,7 +32,7 @@ export class RemoveProduct {
 }
 
 export class UpdateInventory { 
-  static readonly type = '[Inventory] update';
+  static readonly type = '[Inventory] Update';
 
   constructor(private productId:string,private value:number){}
 }

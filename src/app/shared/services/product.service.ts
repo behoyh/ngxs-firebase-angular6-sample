@@ -53,7 +53,7 @@ export class ProductService {
   }
   
   getProductImages(productId: string): Observable<ProductImage[]>{
-    return this.af.collection<ProductImage>('images', ref => ref.where('product', '==', this.af.doc<Product>('products/'+productId).ref)).valueChanges()
+    return this.af.collection<ProductImage>('images', ref => ref.where('product', '==', productId)).valueChanges()
   }
 
   getProductRemain(productId: string): Observable<ProductRemain[]>{
