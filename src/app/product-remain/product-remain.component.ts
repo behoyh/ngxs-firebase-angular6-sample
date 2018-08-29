@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { ProductService } from '../shared/services/product.service';
 import { Observable } from 'rxjs';
-import { ProductRemain } from '../shared'; 
+import { ProductInventory } from '../shared'; 
 
 @Component({
   selector: 'app-product-remain',
@@ -16,17 +16,14 @@ export class ProductRemainComponent implements OnChanges {
   @Input()
   productName: string;
 
-  productRemain: ProductRemain;
+  productInventory: ProductInventory;
 
   constructor(private productService: ProductService) { 
   }
 
   ngOnChanges(){
-    this.productService.getProductRemain(this.productId).subscribe(productRemains=>
-      this.productRemain = productRemains[0]
+    this.productService.getProductInventory(this.productId).subscribe(productRemains=>
+      this.productInventory = productRemains[0]
     )
   }
-
-
-
 }

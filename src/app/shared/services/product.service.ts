@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { from, Observable } from 'rxjs';
 import { take, map, tap } from 'rxjs/operators';
 import { AngularFirestore } from 'angularfire2/firestore';
-import { Product, ProductImage, ProductRemain } from '../models';
+import { Product, ProductImage, ProductInventory } from '../models';
 
 @Injectable()
 export class ProductService {
@@ -56,7 +56,8 @@ export class ProductService {
     return this.af.collection<ProductImage>('images', ref => ref.where('product', '==', productId)).valueChanges()
   }
 
-  getProductRemain(productId: string): Observable<ProductRemain[]>{
-    return this.af.collection<ProductRemain>('remains', ref => ref.where('product', '==', this.af.doc<Product>('products/'+productId).ref).orderBy('date', 'desc').limit(1)).valueChanges()
+  getProductInventory(productId: string): Observable<ProductInventory[]>{
+    debugger;
+    return this.af.collection<ProductInventory>('inventory', ref => ref.where('product', '==', productId)).valueChanges()
   }
 }

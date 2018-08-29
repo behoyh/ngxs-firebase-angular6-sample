@@ -29,11 +29,12 @@ export class ProductFormModel extends ProductModel{
 export interface ProductImage{
   title: string;
   path: string;
-  link: string;//for downloading
+  product: string;//for downloading
 } 
 
-export interface ProductRemain{
+export interface ProductInventory{
   quantity: number;
   totalsum: number;
   date: Date;
+  product: string;
 }
