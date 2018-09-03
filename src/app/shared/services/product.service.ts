@@ -53,11 +53,25 @@ export class ProductService {
   }
   
   getProductImages(productId: string): Observable<ProductImage[]>{
-    return this.af.collection<ProductImage>('images', ref => ref.where('product', '==', productId)).valueChanges()
+    return this.af.collection<ProductImage>('images', ref => ref.where('product', '==', productId)).valueChanges();
   }
 
   getProductInventory(productId: string): Observable<ProductInventory[]>{
-    debugger;
-    return this.af.collection<ProductInventory>('inventory', ref => ref.where('product', '==', productId)).valueChanges()
+    return this.af.collection<ProductInventory>('inventory', ref => ref.where('product', '==', productId)).snapshotChanges()
+    .pipe(map(actions => actions.map(a => {
+      debugger;
+      let product = a.payload.doc.data() as ProductInventory;
+      product.id = a.payload.doc.id;
+      return product;
+    })),
+  );
+  }
+
+  updateProductInventory(productInventory:ProductInventory,val:number) : Promise<any>
+  {
+    const inventory = this.af.doc<ProductInventory>("inventory/" + productInventory.id);
+    return inventory.update({
+      quantity: productInventory.quantity + val 
+    })
   }
 }

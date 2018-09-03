@@ -1,6 +1,6 @@
 import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { Product } from '../models/product.model';
-import { AddProduct, RemoveProduct, GetAddedProducts, GetUpdatedProducts, GetRemovedProducts } from '../actions/product.actions';
+import { AddProduct, RemoveProduct, GetAddedProducts, GetUpdatedProducts, GetRemovedProducts, UpdateInventory } from '../actions/product.actions';
 import { ProductService } from '../services/product.service';
 
 
@@ -70,6 +70,18 @@ export class ProductState {
       productIDs.forEach(productID => {
         patchState({
           products: getState().products.filter(product => product.id != productID)
+        })
+      });
+    }
+    )
+  }
+
+  @Action(UpdateInventory)
+  updateProductInventory({ getState, patchState }: StateContext<ProductStateModel>, { productId, val }) {
+    this.productService.updateProductInventory(productId,val).then(productInventory => {
+      productInventory.forEach(productID => {
+        patchState({
+          //productInventory: getState().products.filter(product => product.id != productID)
         })
       });
     }

@@ -33,6 +33,7 @@ export interface ProductImage{
 } 
 
 export interface ProductInventory{
+  id:string;
   quantity: number;
   totalsum: number;
   date: Date;

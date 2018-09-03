@@ -35,8 +35,6 @@
   </mat-card>
 
   <mat-card class="product-remain">
-      <button mat-mini-fab (click)="addInventory(productForm.get('id').value,-1)">-</button>
-      <button mat-mini-fab (click)="addInventory(productForm.get('id').value,1)">+</button>
     <app-product-remain *ngIf="productForm.get('id').value" [productId]="productForm.get('id').value" [productName]="productForm.get('name').value">
     </app-product-remain>
   </mat-card>

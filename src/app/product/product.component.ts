@@ -43,9 +43,4 @@ export class ProductComponent implements OnInit, OnChanges {
   public addProduct(name, description){
     this.store.dispatch(new AddProduct({name: name, description: description}))
   }
-
-  public addInventory(name, val){
-    this.store.dispatch(new UpdateInventory(name, val))
-  }
-
 }

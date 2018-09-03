@@ -1,11 +1,14 @@
 <div *ngIf="productInventory; else productIsAbsent">
     <mat-card-title>Some {{productName}} Numbers</mat-card-title>
+    
     <mat-card-content>
       <div class="inventory-container">
 
         <mat-card>
           <mat-card-content>
             <h2>{{ productInventory.quantity}}</h2>
+            <button mat-mini-fab (click)="addInventory(productInventory,-1)">-</button>
+            <button mat-mini-fab (click)="addInventory(productInventory,1)">+</button>
           </mat-card-content>
           <mat-card-footer class="quantity-footer">
             <mat-icon aria-hidden="true">store</mat-icon>
@@ -28,7 +31,6 @@
     </mat-card-content>
 
 </div>
-
 <ng-template #productIsAbsent>
   <p> No inventory for the product</p>
 </ng-template>
